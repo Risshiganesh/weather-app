@@ -110,6 +110,11 @@ async function sortData (weatherData){
 
 function sendLocation (){
 
+    searchInput.addEventListener('keydown',async function(){
+        // const autoCompleteResults = await fetch(,{mode:"cors"})
+
+    })
+
     searchButton.addEventListener('click',async function(e){
         e.preventDefault();
         const location = searchInput.value;
