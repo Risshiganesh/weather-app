@@ -10,6 +10,7 @@ body{
     height: 100%;
     width: 100%;
     background-color: grey;
+    /* position: relative; */
 }
 
 body * {
@@ -29,15 +30,40 @@ body * {
 }
 
 #search-form{
-    display: grid;
+    /* display: grid; */
     /* align-items: center; */
     align-items: center;
+    /* position: relative; */
+    border: 3px solid aqua;
 }
 
 .search-container{
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 150px;
+    position: relative;
+}
+
+.drop-down-container{
+    border: 1px solid greenyellow;
+    height: 0px;
+    position: relative;
+    width: 100%;
+
+}
+
+.search-drop-down{
+    position: absolute;
+    border: 3px solid navy;
+    /* height: 300px; */
+    width: 100%;
+    z-index: 1;
+    background-color: blueviolet;
+}
+
+.drop-down-item:hover{
+
+    background-color: yellow;
 }
 
 .logo-container{
@@ -58,12 +84,11 @@ body * {
 .display-container{
     /* align-content: space-between; */
     display: grid;
-    /* align-content: space-between; */
-    /* height: 100%; */
+
     position: relative;
     gap: 15px;
     justify-items: center;
-    /* overflow: hidden; */
+
 }
 
 .current-weather-container{
@@ -87,7 +112,7 @@ body * {
 
 .three-day-average{
     display: grid;
-    /* height: 150px; */
+
     justify-items: center;
     align-items: center;
     overflow: auto;
@@ -120,9 +145,7 @@ body * {
     grid-auto-flow: column;
     gap: 10px;
     align-items: center;
-    /* position: absolute; */
-    /* position: relative; */
-    /* bottom: 0; */
+
     border: 3px solid violet;
     width: 90%;
 }
