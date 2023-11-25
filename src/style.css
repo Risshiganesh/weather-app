@@ -14,7 +14,7 @@ body{
 }
 
 body * {
-    border: 3px solid red;
+    /* border: 3px solid red; */
 }
 
 .main-container{
@@ -104,6 +104,24 @@ body * {
     height: 250px;
     width: 250px;
     border: 3px solid purple;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.temp-display{
+    /* border: 2px solid fuchsia; */
+    font-size: 40px;
+    align-self: flex-end;
+}
+
+.weather-desc{
+    font-size: 20px;
+    /* align-self: start; */
+}
+
+.uv-index{
+    align-self: start;
 }
 
 .toggle-container{
@@ -116,6 +134,7 @@ body * {
     justify-items: center;
     align-items: center;
     overflow: auto;
+    width: 90%;
 
 }
 
@@ -128,14 +147,14 @@ body * {
     justify-items: center;
     height: 200px;
     align-items: center;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .three-day-average-container > div{
     border: 2px solid blue;
     height: 100%;
-    height: 150px;
-    width: 150px;
+    height: 170px;
+    width: 170px;
 }
 
 .hourly-average{
@@ -148,6 +167,7 @@ body * {
 
     border: 3px solid violet;
     width: 90%;
+
 }
 
 .hourly-average > div{

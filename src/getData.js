@@ -1,16 +1,20 @@
-import { createDropDown } from "./dropDownCreation";
-
 const searchButton = document.querySelector("#search-button");
 
-const searchInput = document.querySelector("#search-location");
+//remove all DOM elements from here, only functions that accept parameters are allowed
 
 const API_KEY = "5b3224af0fde4bb9928205228232210";
-// let location = "kuala lumpur";
 
-async function getWeatherData(location) {
+async function getWeatherData(locationData) {
   // convert to async await
 
   try {
+    let location;
+
+    if (locationData.url === true) {
+      location = locationData.url;
+    } else {
+      location = locationData.location;
+    }
     const days = "3";
 
     const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=${days}&aqi=no&alerts=no`;
@@ -19,6 +23,8 @@ async function getWeatherData(location) {
 
     if (!weatherData.ok) {
       console.log("getWeatherData doesn't work!");
+
+      return;
     }
 
     const parsedWeatherData = await weatherData.json();
@@ -31,14 +37,18 @@ async function getWeatherData(location) {
 }
 
 async function sortData(weatherData) {
-  // const weatherData = await getWeatherData();
   try {
+    if (!weatherData) {
+      console.log("location not found");
+      return;
+    }
     console.log(weatherData);
 
     console.log("TTTTTTTTTTT");
 
     const location = weatherData.location.name;
     const country = weatherData.location.country;
+    // const url = ;
     console.log(location);
 
     // ----Current weather------
@@ -50,6 +60,8 @@ async function sortData(weatherData) {
     const feelsLikeFahrenheit = currentWeather.feelslike_f;
 
     const currentDescription = currentWeather.condition.text;
+
+    const currentUV = currentWeather.uv;
 
     // Log current data
     // console.log(currentWeather);
@@ -105,7 +117,12 @@ async function sortData(weatherData) {
         feelsLikeCelsius,
         feelsLikeFahrenheit,
         currentDescription,
+        currentUV,
       },
+      avgDayTempCelsius,
+      // dailyWeatherData: {
+      //   avgDayTempCelsius,
+      // },
     };
   } catch (error) {
     console.log("sort data fn");
@@ -115,9 +132,9 @@ async function sortData(weatherData) {
 
 // sortData();
 
-async function autocomplete() {
+async function autocomplete(searchInputValue) {
   try {
-    const location = searchInput.value;
+    const location = searchInputValue;
     if (!location) {
       return;
     }
@@ -125,36 +142,50 @@ async function autocomplete() {
     console.log(location);
 
     const autocompleteURL = `http://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${location}`;
+
     const autoCompleteResults = await fetch(autocompleteURL, { mode: "cors" });
 
     const parsedAutocompleteResult = await autoCompleteResults.json();
 
-    //   console.log(parsedAutocompleteResult);
-
-    createDropDown(parsedAutocompleteResult);
+    return parsedAutocompleteResult;
   } catch (error) {
     console.log(error);
   }
 }
 
-async function sendLocation() {
+// Send location data to server
+async function retrieveInfo(location, url) {
   // increases coupling, find an alternative later
 
+  console.log(url);
+
   try {
-    const location = searchInput.value;
-    if (!location) {
+    const locationData = {
+      location: location,
+      url: url,
+    };
+    if (!locationData.location) {
       return;
     }
     // console.log(location);
 
-    const weatherData = await getWeatherData(location);
+    const weatherData = await getWeatherData(locationData);
 
     const sortedData = await sortData(weatherData);
 
-    searchInput.value = sortedData.location + ", " + sortedData.country;
+    if (!weatherData) {
+      return;
+    }
+
+    const finalData = {
+      searchResult: sortedData.location + ", " + sortedData.country,
+      finalData: sortedData,
+    };
+
+    return finalData;
   } catch (error) {
     console.log(error);
   }
 }
 
-export { autocomplete, sendLocation };
+export { autocomplete, retrieveInfo };
