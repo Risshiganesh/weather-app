@@ -1,4 +1,6 @@
-import { weatherResult } from "./dropDownCreation";
+import { weatherResult, todayHourlyData } from "./dropDownCreation";
+
+let hourlyArray;
 
 const tempDisplay = document.querySelector(".temp-display");
 
@@ -7,6 +9,8 @@ const tempToggle = document.querySelector("#temp-toggle");
 const weatherDesc = document.querySelector(".weather-desc");
 const uvIndex = document.querySelector(".uv-index");
 
+const dailyDivs = document.querySelectorAll(".daily");
+
 function toggleTemps() {
   let chosenTemp = tempToggle.textContent;
 
@@ -14,7 +18,14 @@ function toggleTemps() {
     if (tempToggle.textContent === "Celsius") {
       tempToggle.textContent = "Fahrenheit";
       chosenTemp = "Fahrenheit";
+
+      // functionise this?
       updateDOMWithData(weatherResult);
+      if (!hourlyArray) {
+        displayHourlyDOM(todayHourlyData);
+        return;
+      }
+      displayHourlyDOM(hourlyArray);
       console.log("HELI");
       return;
     }
@@ -23,6 +34,13 @@ function toggleTemps() {
       tempToggle.textContent = "Celsius";
       chosenTemp = "Celsius";
       updateDOMWithData(weatherResult);
+
+      if (!hourlyArray) {
+        displayHourlyDOM(todayHourlyData);
+        return;
+      }
+      displayHourlyDOM(hourlyArray);
+
       console.log("COPTER");
       return;
     }
@@ -30,9 +48,6 @@ function toggleTemps() {
 
     return;
   });
-
-  // Is this correct?
-  //   updateDOMWithData(weatherData, chosenTemp);
 }
 
 function updateDOMWithData(weatherData) {
@@ -75,7 +90,6 @@ function updateDOMWithData(weatherData) {
 }
 
 function displayDailyDOM(dailyArray) {
-  const dailyDivs = document.querySelectorAll(".daily");
   console.log("WORKSSSS");
 
   for (let index = 0; index < dailyDivs.length; index++) {
@@ -112,4 +126,74 @@ function displayDailyDOM(dailyArray) {
     uvDiv.textContent = "Avg. UV Index: " + dailyArray[index].day.uv;
   }
 }
-export { toggleTemps, updateDOMWithData };
+
+function dailyDivsEventListener() {
+  dailyDivs;
+
+  for (let index = 0; index < dailyDivs.length; index++) {
+    // const element = array[index];
+    dailyDivs[index].addEventListener("click", function () {
+      dailyDivs.forEach((div) => {
+        div.classList.remove("selected-daily");
+      });
+      console.log("BAMBALAMMMM");
+      // console.log(weatherResult.finalData.avgDayTemp[index].hour);
+      hourlyArray = weatherResult.finalData.avgDayTemp[index].hour;
+
+      // add and remove background colour of divs here
+      dailyDivs[index].classList.add("selected-daily");
+
+      displayHourlyDOM(hourlyArray);
+    });
+  }
+}
+
+function displayHourlyDOM(hourlyArray) {
+  if (!hourlyArray) {
+    return;
+  }
+  const hourlyDivs = document.querySelectorAll(".hourly");
+
+  console.log(hourlyArray);
+
+  for (let index = 0; index < hourlyDivs.length; index++) {
+    //   const element = array[index];
+    //   const dateDiv = hourlyDivs[index].querySelector(".date-daily");
+
+    const iconDiv = hourlyDivs[index].querySelector(".icon-hourly");
+    const conditionDiv = hourlyDivs[index].querySelector(".condition-hourly");
+    const avgTempDiv = hourlyDivs[index].querySelector(".avg-temp-hourly");
+    const uvDiv = hourlyDivs[index].querySelector(".uv-hourly");
+
+    if (iconDiv.hasChildNodes) {
+      iconDiv.querySelectorAll("*").forEach(function (child) {
+        child.remove();
+      });
+    }
+
+    const icon = new Image();
+
+    icon.src = hourlyArray[index].condition.icon;
+
+    iconDiv.append(icon);
+
+    conditionDiv.textContent = hourlyArray[index].condition.text;
+
+    if (tempToggle.textContent === "Celsius") {
+      avgTempDiv.textContent = hourlyArray[index].temp_c + "*c";
+    }
+
+    if (tempToggle.textContent === "Fahrenheit") {
+      avgTempDiv.textContent = hourlyArray[index].temp_f + "*F";
+    }
+
+    uvDiv.textContent = "UV Index: " + hourlyArray[index].uv;
+  }
+}
+export {
+  hourlyArray,
+  toggleTemps,
+  updateDOMWithData,
+  dailyDivsEventListener,
+  displayHourlyDOM,
+};

@@ -1,9 +1,13 @@
 import "./style.css";
-import { toggleTemps } from "./domAction";
-import { searchEvents } from "./dropDownCreation";
+import { toggleTemps, dailyDivsEventListener } from "./domAction";
+import { searchEvents, removeDropDown } from "./dropDownCreation";
 
 console.log("webpack works!");
 
 searchEvents();
 // Uncomment later
+
+// Add eventListeners
+removeDropDown();
 toggleTemps();
+dailyDivsEventListener();

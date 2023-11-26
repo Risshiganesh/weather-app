@@ -1,6 +1,10 @@
 import { autocomplete, retrieveInfo } from "./getData.js";
 
-import { toggleTemps, updateDOMWithData } from "./domAction.js";
+import {
+  hourlyArray,
+  updateDOMWithData,
+  displayHourlyDOM,
+} from "./domAction.js";
 
 const searchInput = document.querySelector("#search-location");
 
@@ -10,7 +14,11 @@ const searchDropDown = document.querySelector(".search-drop-down");
 
 const mainContainer = document.querySelector(".main-container");
 
+const dailyDivs = document.querySelectorAll(".daily");
+
 let weatherResult;
+
+let todayHourlyData;
 
 // Create one module for DOM Creation and another for DOM action
 
@@ -44,7 +52,8 @@ function searchEvents() {
       child.remove();
     });
 
-    updateDOMWithData(weatherResult);
+    // updateDOMWithData(weatherResult);
+    initialDOMData();
   });
 
   console.log("module-works");
@@ -94,11 +103,29 @@ function dropDownClickEvent() {
 
       // toggleTemps(newSearchResult);
 
-      updateDOMWithData(weatherResult);
+      // Put these in a function
+      initialDOMData();
+      // Add displayHourlyDOM
 
-      // but what happens if i click the temp toggle?
+      // Until here.
     });
   });
+}
+
+function initialDOMData() {
+  updateDOMWithData(weatherResult);
+
+  todayHourlyData = weatherResult.finalData.avgDayTemp[0].hour;
+
+  console.log(weatherResult.finalData.avgDayTemp[0].hour);
+
+  dailyDivs.forEach((div) => {
+    div.classList.remove("selected-daily");
+  });
+
+  dailyDivs[0].classList.add("selected-daily");
+
+  displayHourlyDOM(todayHourlyData);
 }
 
 function removeDropDown() {
@@ -109,6 +136,10 @@ function removeDropDown() {
   });
 }
 
-removeDropDown();
-
-export { searchEvents, createDropDown, weatherResult };
+export {
+  weatherResult,
+  todayHourlyData,
+  searchEvents,
+  createDropDown,
+  removeDropDown,
+};
