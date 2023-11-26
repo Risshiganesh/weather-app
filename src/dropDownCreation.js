@@ -1,6 +1,6 @@
 import { autocomplete, retrieveInfo } from "./getData.js";
 
-import { toggleTemps } from "./domAction.js";
+import { toggleTemps, updateDOMWithData } from "./domAction.js";
 
 const searchInput = document.querySelector("#search-location");
 
@@ -10,6 +10,8 @@ const searchDropDown = document.querySelector(".search-drop-down");
 
 const mainContainer = document.querySelector(".main-container");
 
+let weatherResult;
+
 // Create one module for DOM Creation and another for DOM action
 
 // Add Event Listener for search events
@@ -17,6 +19,9 @@ function searchEvents() {
   // searchInput.addEventListener("keyup", autocomplete);
 
   searchInput.addEventListener("keyup", async function () {
+    if (!searchInput.value) {
+      return;
+    }
     const searchInputValue = searchInput.value;
     const autocompleteArray = await autocomplete(searchInputValue);
     createDropDown(autocompleteArray);
@@ -24,15 +29,22 @@ function searchEvents() {
 
   searchButton.addEventListener("click", async function (e) {
     e.preventDefault();
+
+    if (!searchInput.value) {
+      return;
+    }
+
     const searchInputValue = searchInput.value;
 
-    const result = await retrieveInfo(searchInputValue);
+    weatherResult = await retrieveInfo(searchInputValue);
 
-    searchInput.value = result.searchResult;
+    searchInput.value = weatherResult.searchResult;
 
     searchDropDown.querySelectorAll("*").forEach(function (child) {
       child.remove();
     });
+
+    updateDOMWithData(weatherResult);
   });
 
   console.log("module-works");
@@ -75,20 +87,16 @@ function dropDownClickEvent() {
       searchInput.value = dropDownItem.textContent;
 
       // use await for this?
-      const newSearchResult = await retrieveInfo(
+      weatherResult = await retrieveInfo(
         dropDownItem.textContent,
         dropDownItem.url
       );
 
-      toggleTemps(newSearchResult);
+      // toggleTemps(newSearchResult);
+
+      updateDOMWithData(weatherResult);
 
       // but what happens if i click the temp toggle?
-
-      // updateDOMWithData(newSearchResult);
-
-      // searchDropDown.querySelectorAll("*").forEach(function (child) {
-      //   child.remove();
-      // });
     });
   });
 }
@@ -103,4 +111,4 @@ function removeDropDown() {
 
 removeDropDown();
 
-export { searchEvents, createDropDown };
+export { searchEvents, createDropDown, weatherResult };

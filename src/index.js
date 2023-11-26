@@ -6,4 +6,4 @@ console.log("webpack works!");
 
 searchEvents();
 // Uncomment later
-// toggleTemps();
+toggleTemps();

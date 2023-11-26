@@ -72,20 +72,20 @@ async function sortData(weatherData) {
     console.log(`Feels Like (C*): ${feelsLikeCelsius}`);
     console.log(`Feels Like (F*): ${feelsLikeFahrenheit}`);
     console.log(`Description: ` + currentDescription);
+    console.log("UV: " + currentUV);
     // add UV levels
 
     // -----Forecast weather-----
 
     const forecastData = weatherData.forecast;
-    const avgDayTempCelsius = forecastData.forecastday;
+    const avgDayTemp = forecastData.forecastday;
 
-    console.log(forecastData);
+    // console.log(forecastData);
     console.log("-------FORECAST DATA (DAY)--------");
 
-    for (const each of avgDayTempCelsius) {
+    for (const each of avgDayTemp) {
       // console.log(each);
-
-      console.log(each.day);
+      // console.log(each.day);
       // temps displayed in f or c depending on which option is chosen
       // day average temp
       // day max temp
@@ -94,15 +94,15 @@ async function sortData(weatherData) {
     }
     console.log("-------FORECAST DATA (HOUR)--------");
 
-    for (const each of avgDayTempCelsius) {
-      console.log(each.hour);
+    for (const each of avgDayTemp) {
+      // console.log(each.hour);
       const hourlyForecastArray = each.hour;
 
       console.log("-----PER HOUR-----");
 
       for (const iterator of hourlyForecastArray) {
-        console.log(iterator);
-        console.log(iterator.time + ": " + " " + iterator.condition.text);
+        // console.log(iterator);
+        // console.log(iterator.time + ": " + " " + iterator.condition.text);
       }
       // temps f and c - displays depending on which option is chosen
       // description or icon
@@ -119,7 +119,7 @@ async function sortData(weatherData) {
         currentDescription,
         currentUV,
       },
-      avgDayTempCelsius,
+      avgDayTemp,
       // dailyWeatherData: {
       //   avgDayTempCelsius,
       // },
