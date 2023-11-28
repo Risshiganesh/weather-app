@@ -154,11 +154,12 @@ function displayHourlyDOM(hourlyArray) {
   }
   const hourlyDivs = document.querySelectorAll(".hourly");
 
-  console.log(hourlyArray);
+  //   console.log(hourlyArray);
 
   for (let index = 0; index < hourlyDivs.length; index++) {
     //   const element = array[index];
     //   const dateDiv = hourlyDivs[index].querySelector(".date-daily");
+    const timeDiv = hourlyDivs[index].querySelector(".time-hourly");
 
     const iconDiv = hourlyDivs[index].querySelector(".icon-hourly");
     const conditionDiv = hourlyDivs[index].querySelector(".condition-hourly");
@@ -170,6 +171,8 @@ function displayHourlyDOM(hourlyArray) {
         child.remove();
       });
     }
+
+    timeDiv.textContent = hourlyArray[index].time.slice(-5);
 
     const icon = new Image();
 

@@ -1,5 +1,7 @@
 import { autocomplete, retrieveInfo } from "./getData.js";
 
+import { initialData } from "./initialiser.js";
+
 import {
   hourlyArray,
   updateDOMWithData,
@@ -53,7 +55,7 @@ function searchEvents() {
     });
 
     // updateDOMWithData(weatherResult);
-    initialDOMData();
+    initialDOMData(weatherResult);
   });
 
   console.log("module-works");
@@ -72,6 +74,7 @@ function createDropDown(autocompleteArray) {
     // console.log(each);
     dropDownItem.textContent = each.name + ", " + each.country;
     dropDownItem.url = each.url;
+    console.log(each.url);
     searchDropDown.append(dropDownItem);
   }
 
@@ -104,7 +107,7 @@ function dropDownClickEvent() {
       // toggleTemps(newSearchResult);
 
       // Put these in a function
-      initialDOMData();
+      initialDOMData(weatherResult);
       // Add displayHourlyDOM
 
       // Until here.
@@ -112,12 +115,17 @@ function dropDownClickEvent() {
   });
 }
 
-function initialDOMData() {
-  updateDOMWithData(weatherResult);
+function initialDOMData(weatherData) {
+  updateDOMWithData(weatherData);
 
-  todayHourlyData = weatherResult.finalData.avgDayTemp[0].hour;
+  if (!weatherResult) {
+    weatherResult = initialData;
+    console.log("INITIAL DATA USED");
+  }
 
-  console.log(weatherResult.finalData.avgDayTemp[0].hour);
+  todayHourlyData = weatherData.finalData.avgDayTemp[0].hour;
+
+  // console.log(weatherData.finalData.avgDayTemp[0].hour);
 
   dailyDivs.forEach((div) => {
     div.classList.remove("selected-daily");
@@ -142,4 +150,5 @@ export {
   searchEvents,
   createDropDown,
   removeDropDown,
+  initialDOMData,
 };
