@@ -49,13 +49,13 @@ async function initialise() {
 }
 
 function setLocalStorage(newData) {
-  localStorage.removeItem("risshiWeatherLocationData");
+  localStorage.removeItem("risshWeatherLocationData");
 
-  localStorage.setItem("risshiWeatherLocationData", newData);
+  localStorage.setItem("risshWeatherLocationData", newData);
 }
 
 function getLocalStorage() {
-  return localStorage.getItem("risshiWeatherLocationData");
+  return localStorage.getItem("risshWeatherLocationData");
 }
 
 export { initialData, initialise, setLocalStorage, getLocalStorage };

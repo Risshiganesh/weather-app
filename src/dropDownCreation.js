@@ -187,6 +187,11 @@ function displayLoadingScreen() {
 
   const loadingGIFContainer = document.querySelector(".loading-gif-container");
 
+  if (loadingGIFContainer.querySelector("img")) {
+    console.log("LOADING GIF PRESENT");
+    return;
+  }
+
   const loadingGIF = new Image();
 
   loadingGIF.src = nowLoading;
