@@ -141,7 +141,7 @@ async function autocomplete(searchInputValue) {
 
     console.log(location);
 
-    const autocompleteURL = `http://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${location}`;
+    const autocompleteURL = `https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${location}`;
 
     const autoCompleteResults = await fetch(autocompleteURL, { mode: "cors" });
 
