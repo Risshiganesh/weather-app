@@ -17,7 +17,7 @@ async function getWeatherData(locationData) {
     }
     const days = "3";
 
-    const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=${days}&aqi=no&alerts=no`;
+    const URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=${days}&aqi=no&alerts=no`;
 
     const weatherData = await fetch(URL, { mode: "cors" });
 
