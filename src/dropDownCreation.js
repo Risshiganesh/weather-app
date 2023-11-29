@@ -1,12 +1,18 @@
 import { autocomplete, retrieveInfo } from "./getData.js";
 
-import { initialData } from "./initialiser.js";
+import {
+  initialData,
+  setLocalStorage,
+  getLocalStorage,
+} from "./initialiser.js";
 
 import {
   hourlyArray,
   updateDOMWithData,
   displayHourlyDOM,
 } from "./domAction.js";
+
+import nowLoading from "./assets/loading.gif";
 
 const searchInput = document.querySelector("#search-location");
 
@@ -44,11 +50,29 @@ function searchEvents() {
       return;
     }
 
+    displayLoadingScreen();
+
     const searchInputValue = searchInput.value;
 
     weatherResult = await retrieveInfo(searchInputValue);
 
+    if (!weatherResult) {
+      console.log("NOT FOUND");
+
+      statusDisplay(false);
+
+      // display location not found on DOM
+
+      console.log(weatherResult);
+      removeLoadingScreen();
+      return;
+    }
+
     searchInput.value = weatherResult.searchResult;
+
+    setLocalStorage(weatherResult.searchResult);
+
+    statusDisplay(weatherResult.searchResult);
 
     searchDropDown.querySelectorAll("*").forEach(function (child) {
       child.remove();
@@ -56,6 +80,10 @@ function searchEvents() {
 
     // updateDOMWithData(weatherResult);
     initialDOMData(weatherResult);
+
+    // setTimeout(removeLoadingScreen, 5000);
+
+    removeLoadingScreen();
   });
 
   console.log("module-works");
@@ -94,9 +122,12 @@ function dropDownClickEvent() {
   dropDownItemNodeList.forEach((dropDownItem) => {
     // console.log(dropDownItem);
     dropDownItem.addEventListener("click", async function () {
+      displayLoadingScreen();
       // console.log("test-click");
 
       searchInput.value = dropDownItem.textContent;
+
+      setLocalStorage(dropDownItem.textContent);
 
       // use await for this?
       weatherResult = await retrieveInfo(
@@ -104,6 +135,7 @@ function dropDownClickEvent() {
         dropDownItem.url
       );
 
+      statusDisplay(dropDownItem.textContent);
       // toggleTemps(newSearchResult);
 
       // Put these in a function
@@ -111,6 +143,8 @@ function dropDownClickEvent() {
       // Add displayHourlyDOM
 
       // Until here.
+
+      removeLoadingScreen();
     });
   });
 }
@@ -144,6 +178,45 @@ function removeDropDown() {
   });
 }
 
+function displayLoadingScreen() {
+  // const loadingScreen = document.createElement('div');
+  // loadingScreen.classList.add('loading-screen')
+
+  // mainContainer.append(loadingScreen);
+
+  const loadingGIFContainer = document.querySelector(".loading-gif-container");
+
+  const loadingGIF = new Image();
+
+  loadingGIF.src = nowLoading;
+
+  loadingGIFContainer.append(loadingGIF);
+
+  const loadingScreen = document.querySelector(".loading-screen");
+  loadingScreen.classList.add("enable-loading-screen");
+}
+
+function removeLoadingScreen() {
+  const loadingGIFContainer = document.querySelector(".loading-gif-container");
+
+  loadingGIFContainer.querySelector("img").remove();
+  const loadingScreen = document.querySelector(".loading-screen");
+  loadingScreen.classList.remove("enable-loading-screen");
+}
+
+function statusDisplay(location) {
+  const statusMessage = document.querySelector(".status-message");
+
+  if (!location) {
+    const previousData = getLocalStorage();
+
+    statusMessage.textContent =
+      "Location not found, still displaying: " + previousData;
+    return;
+  }
+  statusMessage.textContent = "Currently displaying: " + location;
+}
+
 export {
   weatherResult,
   todayHourlyData,
@@ -151,4 +224,7 @@ export {
   createDropDown,
   removeDropDown,
   initialDOMData,
+  displayLoadingScreen,
+  removeLoadingScreen,
+  statusDisplay,
 };

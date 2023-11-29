@@ -1,5 +1,10 @@
 import { retrieveInfo } from "./getData";
-import { initialDOMData } from "./dropDownCreation";
+import {
+  initialDOMData,
+  displayLoadingScreen,
+  removeLoadingScreen,
+  statusDisplay,
+} from "./dropDownCreation";
 
 // function initialise(){
 // Check if there is local storage data
@@ -14,17 +19,43 @@ let initialData;
 const searchInput = document.querySelector("#search-location");
 
 async function initialise() {
-  if (!searchInput.value) {
+  displayLoadingScreen();
+
+  const kickoffData = getLocalStorage();
+
+  // if localStorage is empty
+  if (!kickoffData) {
     const kualaLumpur = "Kuala Lumpur, Malaysia";
     searchInput.value = kualaLumpur;
 
-    initialData = await retrieveInfo(
-      kualaLumpur,
-      "kuala-lumpur-kuala-lumpur-malaysia"
-    );
+    setLocalStorage(kualaLumpur);
 
-    initialDOMData(initialData);
+    console.log("NONE");
+
+    initialise();
+
+    return;
   }
+
+  searchInput.value = kickoffData;
+
+  initialData = await retrieveInfo(kickoffData);
+
+  statusDisplay(kickoffData);
+
+  initialDOMData(initialData);
+
+  removeLoadingScreen();
 }
 
-export { initialData, initialise };
+function setLocalStorage(newData) {
+  localStorage.removeItem("risshiWeatherLocationData");
+
+  localStorage.setItem("risshiWeatherLocationData", newData);
+}
+
+function getLocalStorage() {
+  return localStorage.getItem("risshiWeatherLocationData");
+}
+
+export { initialData, initialise, setLocalStorage, getLocalStorage };

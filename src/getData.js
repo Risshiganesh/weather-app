@@ -182,6 +182,8 @@ async function retrieveInfo(location, url) {
       finalData: sortedData,
     };
 
+    console.log(finalData);
+
     return finalData;
   } catch (error) {
     console.log(error);
