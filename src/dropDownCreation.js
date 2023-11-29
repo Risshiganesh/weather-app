@@ -154,6 +154,7 @@ function initialDOMData(weatherData) {
 
   if (!weatherResult) {
     weatherResult = initialData;
+    console.log(initialData);
     console.log("INITIAL DATA USED");
   }
 
