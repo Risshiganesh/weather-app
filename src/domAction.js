@@ -1,4 +1,4 @@
-import { weatherResult, todayHourlyData } from "./dropDownCreation";
+import { weatherResult, todayHourlyData } from "./searchAction";
 
 let hourlyArray;
 

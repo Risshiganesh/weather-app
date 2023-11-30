@@ -4,6 +4,8 @@ const searchButton = document.querySelector("#search-button");
 
 const API_KEY = "5b3224af0fde4bb9928205228232210";
 
+// let previousData;
+
 async function getWeatherData(locationData) {
   // convert to async await
 
@@ -24,10 +26,14 @@ async function getWeatherData(locationData) {
     if (!weatherData.ok) {
       console.log("getWeatherData doesn't work!");
 
+      // console.log(previousData);
+
       return;
     }
 
     const parsedWeatherData = await weatherData.json();
+
+    // previousData = parsedWeatherData;
 
     return parsedWeatherData;
   } catch (error) {

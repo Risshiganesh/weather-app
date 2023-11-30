@@ -26,6 +26,8 @@ const dailyDivs = document.querySelectorAll(".daily");
 
 let weatherResult;
 
+let searchSuccess;
+
 let todayHourlyData;
 
 // Create one module for DOM Creation and another for DOM action
@@ -56,6 +58,7 @@ function searchEvents() {
 
     weatherResult = await retrieveInfo(searchInputValue);
 
+    // if search fails - use previously successful data
     if (!weatherResult) {
       console.log("NOT FOUND");
 
@@ -64,9 +67,26 @@ function searchEvents() {
       // display location not found on DOM
 
       console.log(weatherResult);
+      // uses previous data
+      console.log("USING SEARCH SUCCESS");
+      // if no data in searchSuccess use initialData
+      if (!searchSuccess) {
+        searchSuccess = initialData;
+      }
+      console.log(searchSuccess);
+      initialDOMData(searchSuccess);
       removeLoadingScreen();
       return;
     }
+
+    // if search is a success
+
+    if (weatherResult == true) {
+    }
+
+    console.log("search success works");
+    searchSuccess = weatherResult;
+    console.log(weatherResult);
 
     searchInput.value = weatherResult.searchResult;
 
@@ -135,6 +155,11 @@ function dropDownClickEvent() {
         dropDownItem.url
       );
 
+      if (weatherResult === true) {
+        console.log("search success works");
+        searchSuccess = weatherResult;
+      }
+
       statusDisplay(dropDownItem.textContent);
       // toggleTemps(newSearchResult);
 
@@ -150,13 +175,13 @@ function dropDownClickEvent() {
 }
 
 function initialDOMData(weatherData) {
-  updateDOMWithData(weatherData);
+  // so that it can be used by tempToggle
+  weatherResult = weatherData;
 
-  if (!weatherResult) {
-    weatherResult = initialData;
-    console.log(initialData);
-    console.log("INITIAL DATA USED");
-  }
+  updateDOMWithData(weatherData);
+  console.log("weather result");
+  console.log(weatherData);
+  console.log("--------------END-----------------");
 
   todayHourlyData = weatherData.finalData.avgDayTemp[0].hour;
 
