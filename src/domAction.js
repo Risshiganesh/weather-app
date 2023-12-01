@@ -3,11 +3,11 @@ import { weatherResult, todayHourlyData } from "./searchAction";
 let hourlyArray;
 
 const tempDisplay = document.querySelector(".temp-display");
-
-const tempToggle = document.querySelector("#temp-toggle");
-
+const currentIcon = document.querySelector(".icon-current");
 const weatherDesc = document.querySelector(".weather-desc");
 const uvIndex = document.querySelector(".uv-index");
+
+const tempToggle = document.querySelector("#temp-toggle");
 
 const dailyDivs = document.querySelectorAll(".daily");
 
@@ -49,7 +49,7 @@ function toggleTemps() {
 
       return;
     } catch (error) {
-      console.log("Error in toggleTemps: " + error);
+      console.error("Error in toggleTemps: " + error);
     }
   });
 }
@@ -70,7 +70,11 @@ function updateDOMWithData(weatherData) {
     console.log(currentWeatherData);
     console.log(avgDayTemp);
 
-    tempDisplay.textContent = currentWeatherData.actualCelsius + " *c";
+    tempDisplay.textContent = currentWeatherData.actualCelsius + "°C";
+
+    const iconsrc = currentWeatherData.currentIcon;
+
+    appendIcon(currentIcon, iconsrc);
     weatherDesc.textContent = currentWeatherData.currentDescription;
     uvIndex.textContent = "UV Index: " + currentWeatherData.currentUV;
 
@@ -83,7 +87,7 @@ function updateDOMWithData(weatherData) {
     console.log("YEP");
     // console.log(weatherData);
 
-    tempDisplay.textContent = currentWeatherData.actualFahrenheit + " *F";
+    tempDisplay.textContent = currentWeatherData.actualFahrenheit + "°F";
     weatherDesc.textContent = currentWeatherData.currentDescription;
     uvIndex.textContent = "UV Index: " + currentWeatherData.currentUV;
 
@@ -91,6 +95,21 @@ function updateDOMWithData(weatherData) {
 
     return;
   }
+}
+// INCOMPLETE
+function appendIcon(iconDiv, iconsrc) {
+  if (iconDiv.hasChildNodes) {
+    iconDiv.querySelectorAll("*").forEach(function (child) {
+      child.remove();
+    });
+  }
+  const icon = new Image();
+
+  icon.src = iconsrc;
+
+  iconDiv.append(icon);
+
+  // COMPLETE THIS
 }
 
 function displayDailyDOM(dailyArray) {
@@ -106,24 +125,26 @@ function displayDailyDOM(dailyArray) {
     dateDiv.textContent = dailyArray[index].date;
 
     if (tempToggle.textContent === "Celsius") {
-      avgTempDiv.textContent = dailyArray[index].day.avgtemp_c + "*c";
+      avgTempDiv.textContent = dailyArray[index].day.avgtemp_c + "°C";
     }
 
     if (tempToggle.textContent === "Fahrenheit") {
-      avgTempDiv.textContent = dailyArray[index].day.avgtemp_f + "*F";
+      avgTempDiv.textContent = dailyArray[index].day.avgtemp_f + "°F";
     }
 
-    if (iconDiv.hasChildNodes) {
-      iconDiv.querySelectorAll("*").forEach(function (child) {
-        child.remove();
-      });
-    }
+    // if (iconDiv.hasChildNodes) {
+    //   iconDiv.querySelectorAll("*").forEach(function (child) {
+    //     child.remove();
+    //   });
+    // }
 
-    const icon = new Image();
+    // const icon = new Image();
 
-    icon.src = dailyArray[index].day.condition.icon;
+    const iconsrc = dailyArray[index].day.condition.icon;
 
-    iconDiv.append(icon);
+    //   iconDiv.append(icon);
+
+    appendIcon(iconDiv, iconsrc);
 
     conditionDiv.textContent = dailyArray[index].day.condition.text;
 
@@ -170,28 +191,32 @@ function displayHourlyDOM(hourlyArray) {
     const avgTempDiv = hourlyDivs[index].querySelector(".avg-temp-hourly");
     const uvDiv = hourlyDivs[index].querySelector(".uv-hourly");
 
-    if (iconDiv.hasChildNodes) {
-      iconDiv.querySelectorAll("*").forEach(function (child) {
-        child.remove();
-      });
-    }
-
     timeDiv.textContent = hourlyArray[index].time.slice(-5);
 
-    const icon = new Image();
+    // if (iconDiv.hasChildNodes) {
+    //   iconDiv.querySelectorAll("*").forEach(function (child) {
+    //     child.remove();
+    //   });
+    // }
 
-    icon.src = hourlyArray[index].condition.icon;
+    // const icon = new Image();
 
-    iconDiv.append(icon);
+    //   icon.src = hourlyArray[index].condition.icon;
+
+    const iconsrc = hourlyArray[index].condition.icon;
+
+    //   iconDiv.append(icon);
+
+    appendIcon(iconDiv, iconsrc);
 
     conditionDiv.textContent = hourlyArray[index].condition.text;
 
     if (tempToggle.textContent === "Celsius") {
-      avgTempDiv.textContent = hourlyArray[index].temp_c + "*c";
+      avgTempDiv.textContent = hourlyArray[index].temp_c + "°C";
     }
 
     if (tempToggle.textContent === "Fahrenheit") {
-      avgTempDiv.textContent = hourlyArray[index].temp_f + "*F";
+      avgTempDiv.textContent = hourlyArray[index].temp_f + "°F";
     }
 
     uvDiv.textContent = "UV Index: " + hourlyArray[index].uv;

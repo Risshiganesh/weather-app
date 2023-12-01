@@ -37,8 +37,8 @@ async function getWeatherData(locationData) {
 
     return parsedWeatherData;
   } catch (error) {
-    console.log(error);
-    console.log("works!!!!");
+    console.error("getWeatherData: " + error);
+    // console.log("works!!!!");
   }
 }
 
@@ -64,6 +64,7 @@ async function sortData(weatherData) {
     const actualFahrenheit = currentWeather.temp_f;
     const feelsLikeCelsius = currentWeather.feelslike_c;
     const feelsLikeFahrenheit = currentWeather.feelslike_f;
+    const currentIcon = currentWeather.condition.icon;
 
     const currentDescription = currentWeather.condition.text;
 
@@ -94,6 +95,7 @@ async function sortData(weatherData) {
         actualFahrenheit,
         feelsLikeCelsius,
         feelsLikeFahrenheit,
+        currentIcon,
         currentDescription,
         currentUV,
       },
@@ -104,7 +106,7 @@ async function sortData(weatherData) {
     };
   } catch (error) {
     console.log("sort data fn");
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -127,7 +129,7 @@ async function autocomplete(searchInputValue) {
 
     return parsedAutocompleteResult;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -166,7 +168,7 @@ async function retrieveInfo(location) {
 
     return finalData;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

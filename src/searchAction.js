@@ -47,7 +47,7 @@ function searchEvents() {
       const autocompleteArray = await autocomplete(searchInputValue);
       createDropDown(autocompleteArray);
     } catch (error) {
-      console.log("Error in searchEvents(searchInput): " + error);
+      console.error("Error in searchEvents(searchInput): " + error);
     }
   });
 
@@ -63,7 +63,7 @@ function searchEvents() {
 
       populateDOM(searchInputValue);
     } catch (error) {
-      console.log("Error in searchEvents(searchButton): " + error);
+      console.error("Error in searchEvents(searchButton): " + error);
     }
   });
 
@@ -108,7 +108,7 @@ function dropDownClickEvent() {
 
         populateDOM(dropDownItem.textContent);
       } catch (error) {
-        console.log("Error in dropDownClickEvent: " + error);
+        console.error("Error in dropDownClickEvent: " + error);
       }
     });
   });
@@ -197,7 +197,7 @@ function geolocationBtnEvent() {
 
       populateDOM(geolocationData);
     } catch (error) {
-      console.log(
+      console.error(
         "Error in geolocationBtnListener(geolocationButton): " + error
       );
     }

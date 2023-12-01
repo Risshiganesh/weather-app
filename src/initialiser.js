@@ -48,7 +48,7 @@ async function initialise() {
 
     removeLoadingScreen();
   } catch (error) {
-    console.log("Error in initialise: " + error);
+    console.error("Error in initialise: " + error);
   }
 }
 

@@ -27,7 +27,7 @@ async function getGeolocationData() {
       console.log("Geolocation not supported");
     }
   } catch (error) {
-    console.log("Error in getGeolocationData: " + error);
+    console.error("Error in getGeolocationData: " + error);
   }
 }
 
