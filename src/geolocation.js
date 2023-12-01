@@ -1,47 +1,34 @@
-// sort this async api out
 async function getGeolocationData() {
-  let latitudeLongitudeQuery;
+  try {
+    if ("geolocation" in navigator) {
+      const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+      };
 
-  function geolocationSuccess(pos) {
-    console.log(pos.coords);
+      async function useNavigator() {
+        return new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+      }
 
-    const latitude = pos.coords.latitude.toFixed(4);
-    const longitude = pos.coords.longitude.toFixed(4);
+      const coordinates = await useNavigator();
 
-    const latitudeString = latitude.toString();
-    const longitudeString = longitude.toString();
+      const latitude = coordinates.coords.latitude.toFixed(4);
+      const longitude = coordinates.coords.longitude.toFixed(4);
 
-    //   console.log(latitudeString + "," + longitudeString);
+      const latitudeString = latitude.toString();
+      const longitudeString = longitude.toString();
 
-    latitudeLongitudeQuery = latitudeString + "," + longitudeString;
+      const latitudeLongitudeQuery = latitudeString + "," + longitudeString;
+
+      return latitudeLongitudeQuery;
+    } else {
+      console.log("Geolocation not supported");
+    }
+  } catch (error) {
+    console.log("Error in getGeolocationData: " + error);
   }
-
-  function geolocationFail(error) {
-    console.log(error);
-  }
-
-  if ("geolocation" in navigator) {
-    const options = {
-      enableHighAccuracy: true,
-      maximumAge: 0,
-    };
-
-    navigator.geolocation.getCurrentPosition(
-      geolocationSuccess,
-      geolocationFail,
-      options
-    );
-
-    // console.log(geolocationResult);
-
-    // return geolocationResult;
-  } else {
-    console.log("Geolocation not supported");
-  }
-
-  console.log(latitudeLongitudeQuery);
-
-  return latitudeLongitudeQuery;
 }
 
 export { getGeolocationData };

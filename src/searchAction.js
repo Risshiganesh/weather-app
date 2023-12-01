@@ -12,6 +12,8 @@ import {
   displayHourlyDOM,
 } from "./domAction.js";
 
+import { getGeolocationData } from "./geolocation.js";
+
 import nowLoading from "./assets/loading.gif";
 
 const searchInput = document.querySelector("#search-location");
@@ -37,73 +39,32 @@ function searchEvents() {
   // searchInput.addEventListener("keyup", autocomplete);
 
   searchInput.addEventListener("keyup", async function () {
-    if (!searchInput.value) {
-      return;
+    try {
+      if (!searchInput.value) {
+        return;
+      }
+      const searchInputValue = searchInput.value;
+      const autocompleteArray = await autocomplete(searchInputValue);
+      createDropDown(autocompleteArray);
+    } catch (error) {
+      console.log("Error in searchEvents(searchInput): " + error);
     }
-    const searchInputValue = searchInput.value;
-    const autocompleteArray = await autocomplete(searchInputValue);
-    createDropDown(autocompleteArray);
   });
 
   searchButton.addEventListener("click", async function (e) {
     e.preventDefault();
 
-    if (!searchInput.value) {
-      return;
-    }
-
-    displayLoadingScreen();
-
-    const searchInputValue = searchInput.value;
-
-    weatherResult = await retrieveInfo(searchInputValue);
-
-    // if search fails - use previously successful data
-    if (!weatherResult) {
-      console.log("NOT FOUND");
-
-      statusDisplay(false);
-
-      // display location not found on DOM
-
-      console.log(weatherResult);
-      // uses previous data
-      console.log("USING SEARCH SUCCESS");
-      // if no data in searchSuccess use initialData
-      if (!searchSuccess) {
-        searchSuccess = initialData;
+    try {
+      if (!searchInput.value) {
+        return;
       }
-      console.log(searchSuccess);
-      initialDOMData(searchSuccess);
-      removeLoadingScreen();
-      return;
+
+      const searchInputValue = searchInput.value;
+
+      populateDOM(searchInputValue);
+    } catch (error) {
+      console.log("Error in searchEvents(searchButton): " + error);
     }
-
-    // if search is a success
-
-    if (weatherResult == true) {
-    }
-
-    console.log("search success works");
-    searchSuccess = weatherResult;
-    console.log(weatherResult);
-
-    searchInput.value = weatherResult.searchResult;
-
-    setLocalStorage(weatherResult.searchResult);
-
-    statusDisplay(weatherResult.searchResult);
-
-    searchDropDown.querySelectorAll("*").forEach(function (child) {
-      child.remove();
-    });
-
-    // updateDOMWithData(weatherResult);
-    initialDOMData(weatherResult);
-
-    // setTimeout(removeLoadingScreen, 5000);
-
-    removeLoadingScreen();
   });
 
   console.log("module-works");
@@ -121,8 +82,8 @@ function createDropDown(autocompleteArray) {
     dropDownItem.classList.add("drop-down-item");
     // console.log(each);
     dropDownItem.textContent = each.name + ", " + each.country;
-    dropDownItem.url = each.url;
-    console.log(each.url);
+    // dropDownItem.url = each.url;
+    // console.log(each.url);
     searchDropDown.append(dropDownItem);
   }
 
@@ -142,34 +103,13 @@ function dropDownClickEvent() {
   dropDownItemNodeList.forEach((dropDownItem) => {
     // console.log(dropDownItem);
     dropDownItem.addEventListener("click", async function () {
-      displayLoadingScreen();
-      // console.log("test-click");
+      try {
+        searchInput.value = dropDownItem.textContent;
 
-      searchInput.value = dropDownItem.textContent;
-
-      setLocalStorage(dropDownItem.textContent);
-
-      // use await for this?
-      weatherResult = await retrieveInfo(
-        dropDownItem.textContent,
-        dropDownItem.url
-      );
-
-      if (weatherResult === true) {
-        console.log("search success works");
-        searchSuccess = weatherResult;
+        populateDOM(dropDownItem.textContent);
+      } catch (error) {
+        console.log("Error in dropDownClickEvent: " + error);
       }
-
-      statusDisplay(dropDownItem.textContent);
-      // toggleTemps(newSearchResult);
-
-      // Put these in a function
-      initialDOMData(weatherResult);
-      // Add displayHourlyDOM
-
-      // Until here.
-
-      removeLoadingScreen();
     });
   });
 }
@@ -184,8 +124,6 @@ function initialDOMData(weatherData) {
   console.log("--------------END-----------------");
 
   todayHourlyData = weatherData.finalData.avgDayTemp[0].hour;
-
-  // console.log(weatherData.finalData.avgDayTemp[0].hour);
 
   dailyDivs.forEach((div) => {
     div.classList.remove("selected-daily");
@@ -205,11 +143,6 @@ function removeDropDown() {
 }
 
 function displayLoadingScreen() {
-  // const loadingScreen = document.createElement('div');
-  // loadingScreen.classList.add('loading-screen')
-
-  // mainContainer.append(loadingScreen);
-
   const loadingGIFContainer = document.querySelector(".loading-gif-container");
 
   if (loadingGIFContainer.querySelector("img")) {
@@ -248,10 +181,87 @@ function statusDisplay(location) {
   statusMessage.textContent = "Currently displaying: " + location;
 }
 
+function geolocationBtnEvent() {
+  const geolocationButton = document.querySelector("#geolocation-button");
+  const searchDropDown = document.querySelector(".search-drop-down");
+  geolocationButton.addEventListener("click", async function (e) {
+    e.preventDefault();
+    try {
+      const geolocationData = await getGeolocationData();
+      console.log(geolocationData);
+
+      //
+      //
+
+      // const searchInputValue = searchInput.value;
+
+      populateDOM(geolocationData);
+    } catch (error) {
+      console.log(
+        "Error in geolocationBtnListener(geolocationButton): " + error
+      );
+    }
+  });
+}
+
+async function populateDOM(inputData) {
+  displayLoadingScreen();
+
+  weatherResult = await retrieveInfo(inputData);
+
+  // if search fails - use previously successful data
+  if (!weatherResult) {
+    console.log("NOT FOUND");
+
+    statusDisplay(false);
+
+    // display location not found on DOM
+
+    console.log(weatherResult);
+    // uses previous data
+    console.log("USING SEARCH SUCCESS");
+    // if no data in searchSuccess use initialData
+    if (!searchSuccess) {
+      searchSuccess = initialData;
+    }
+    console.log(searchSuccess);
+    initialDOMData(searchSuccess);
+    removeLoadingScreen();
+    return;
+  }
+
+  // if search is a success
+
+  if (weatherResult == true) {
+  }
+
+  console.log("search success works");
+  searchSuccess = weatherResult;
+  console.log(weatherResult);
+
+  searchInput.value = weatherResult.searchResult;
+
+  setLocalStorage(weatherResult.searchResult);
+
+  statusDisplay(weatherResult.searchResult);
+
+  searchDropDown.querySelectorAll("*").forEach(function (child) {
+    child.remove();
+  });
+
+  // updateDOMWithData(weatherResult);
+  initialDOMData(weatherResult);
+
+  // setTimeout(removeLoadingScreen, 5000);
+
+  removeLoadingScreen();
+}
+
 export {
   weatherResult,
   todayHourlyData,
   searchEvents,
+  geolocationBtnEvent,
   createDropDown,
   removeDropDown,
   initialDOMData,

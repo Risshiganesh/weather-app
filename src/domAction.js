@@ -15,38 +15,42 @@ function toggleTemps() {
   let chosenTemp = tempToggle.textContent;
 
   tempToggle.addEventListener("click", async function () {
-    if (tempToggle.textContent === "Celsius") {
-      tempToggle.textContent = "Fahrenheit";
-      chosenTemp = "Fahrenheit";
+    try {
+      if (tempToggle.textContent === "Celsius") {
+        tempToggle.textContent = "Fahrenheit";
+        chosenTemp = "Fahrenheit";
 
-      // functionise this?
-      updateDOMWithData(weatherResult);
-      if (!hourlyArray) {
-        displayHourlyDOM(todayHourlyData);
+        // functionise this?
+        updateDOMWithData(weatherResult);
+        if (!hourlyArray) {
+          displayHourlyDOM(todayHourlyData);
+          return;
+        }
+        displayHourlyDOM(hourlyArray);
+        console.log("HELI");
         return;
       }
-      displayHourlyDOM(hourlyArray);
-      console.log("HELI");
-      return;
-    }
 
-    if (tempToggle.textContent === "Fahrenheit") {
-      tempToggle.textContent = "Celsius";
-      chosenTemp = "Celsius";
-      updateDOMWithData(weatherResult);
+      if (tempToggle.textContent === "Fahrenheit") {
+        tempToggle.textContent = "Celsius";
+        chosenTemp = "Celsius";
+        updateDOMWithData(weatherResult);
 
-      if (!hourlyArray) {
-        displayHourlyDOM(todayHourlyData);
+        if (!hourlyArray) {
+          displayHourlyDOM(todayHourlyData);
+          return;
+        }
+        displayHourlyDOM(hourlyArray);
+
+        console.log("COPTER");
         return;
       }
-      displayHourlyDOM(hourlyArray);
+      console.log("TESTTTTT");
 
-      console.log("COPTER");
       return;
+    } catch (error) {
+      console.log("Error in toggleTemps: " + error);
     }
-    console.log("TESTTTTT");
-
-    return;
   });
 }
 

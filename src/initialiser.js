@@ -19,33 +19,37 @@ let initialData;
 const searchInput = document.querySelector("#search-location");
 
 async function initialise() {
-  displayLoadingScreen();
+  try {
+    displayLoadingScreen();
 
-  const kickoffData = getLocalStorage();
+    const kickoffData = getLocalStorage();
 
-  // if localStorage is empty
-  if (!kickoffData) {
-    const kualaLumpur = "Kuala Lumpur, Malaysia";
-    searchInput.value = kualaLumpur;
+    // if localStorage is empty
+    if (!kickoffData) {
+      const kualaLumpur = "Kuala Lumpur, Malaysia";
+      searchInput.value = kualaLumpur;
 
-    setLocalStorage(kualaLumpur);
+      setLocalStorage(kualaLumpur);
 
-    console.log("NONE");
+      console.log("NONE");
 
-    initialise();
+      initialise();
 
-    return;
+      return;
+    }
+
+    searchInput.value = kickoffData;
+
+    initialData = await retrieveInfo(kickoffData);
+
+    statusDisplay(kickoffData);
+
+    initialDOMData(initialData);
+
+    removeLoadingScreen();
+  } catch (error) {
+    console.log("Error in initialise: " + error);
   }
-
-  searchInput.value = kickoffData;
-
-  initialData = await retrieveInfo(kickoffData);
-
-  statusDisplay(kickoffData);
-
-  initialDOMData(initialData);
-
-  removeLoadingScreen();
 }
 
 function setLocalStorage(newData) {

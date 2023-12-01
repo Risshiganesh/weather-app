@@ -10,16 +10,16 @@ async function getWeatherData(locationData) {
   // convert to async await
 
   try {
-    let location;
+    // let location;
 
-    if (locationData.url === true) {
-      location = locationData.url;
-    } else {
-      location = locationData.location;
-    }
+    // if (locationData.url === true) {
+    //   location = locationData.url;
+    // } else {
+    //   location = locationData.location;
+    // }
     const days = "3";
 
-    const URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=${days}&aqi=no&alerts=no`;
+    const URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationData}&days=${days}&aqi=no&alerts=no`;
 
     const weatherData = await fetch(URL, { mode: "cors" });
 
@@ -86,34 +86,6 @@ async function sortData(weatherData) {
     const forecastData = weatherData.forecast;
     const avgDayTemp = forecastData.forecastday;
 
-    // console.log(forecastData);
-    console.log("-------FORECAST DATA (DAY)--------");
-
-    for (const each of avgDayTemp) {
-      // console.log(each);
-      // console.log(each.day);
-      // temps displayed in f or c depending on which option is chosen
-      // day average temp
-      // day max temp
-      // day min temp
-      // description/icon
-    }
-    console.log("-------FORECAST DATA (HOUR)--------");
-
-    for (const each of avgDayTemp) {
-      // console.log(each.hour);
-      const hourlyForecastArray = each.hour;
-
-      console.log("-----PER HOUR-----");
-
-      for (const iterator of hourlyForecastArray) {
-        // console.log(iterator);
-        // console.log(iterator.time + ": " + " " + iterator.condition.text);
-      }
-      // temps f and c - displays depending on which option is chosen
-      // description or icon
-    }
-
     return {
       location,
       country,
@@ -160,22 +132,24 @@ async function autocomplete(searchInputValue) {
 }
 
 // Send location data to server
-async function retrieveInfo(location, url) {
+async function retrieveInfo(location) {
   // increases coupling, find an alternative later
 
-  console.log(url);
+  // console.log(url);
 
   try {
-    const locationData = {
-      location: location,
-      url: url,
-    };
-    if (!locationData.location) {
+    // const locationData = {
+    //   location: location,
+    //   url: url,
+    // };
+    if (!location) {
       return;
     }
     // console.log(location);
 
-    const weatherData = await getWeatherData(locationData);
+    console.log("Location used: " + location);
+
+    const weatherData = await getWeatherData(location);
 
     const sortedData = await sortData(weatherData);
 
