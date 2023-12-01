@@ -70,10 +70,9 @@ body * {
 
 }
 
-#search-location{
-    border: 2px solid black;
-    height: 30px;
-}
+
+
+
 
 /* height is 70px */
 #search-form{
@@ -88,10 +87,20 @@ body * {
 .search-container{
     display: grid;
     column-gap: 10px;
-    grid-template-columns: 1fr 50px 150px;
+    grid-template-columns: 1fr 50px 100px;
+    /* grid-template-columns: 1fr 1fr 1fr; */
     position: relative;
     border: 1px solid red;
     align-self: end;
+}
+
+#search-location {
+    appearance: none;
+    border: 2px solid black;
+    height: 30px;
+    /* width: 100px; */
+    min-width: 100px;
+
 }
 
 .drop-down-container{
@@ -138,7 +147,7 @@ body * {
 
 .logo-div{
     border: 2px solid red;
-    width: 300px;
+    width: 200px;
     text-align: center;
 }
 
