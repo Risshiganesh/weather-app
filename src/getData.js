@@ -50,7 +50,7 @@ async function sortData(weatherData) {
     }
     console.log(weatherData);
 
-    console.log("TTTTTTTTTTT");
+    console.log("SORTING DATA");
 
     const location = weatherData.location.name;
     const country = weatherData.location.country;
