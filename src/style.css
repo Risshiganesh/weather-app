@@ -9,19 +9,23 @@ html,
 body{
     height: 100%;
     width: 100%;
-    background-color: grey;
+    background-color: #800020;
     /* position: relative; */
+    
+
 }
 
 body * {
     /* border: 3px solid red; */
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .main-container{
     display: grid;
     /* gap: 10px; */
     height: 100%;
-    grid-template-rows: 30px 70px 1fr 35px;
+    grid-template-rows: 35px 70px 1fr 35px;
 }
 
 .loading-screen{
@@ -71,6 +75,25 @@ body * {
 }
 
 
+.logo-container {
+    /* text-align: center; */
+    /* border: 2px solid gold; */
+    display: grid;
+    justify-items: center;
+    align-items: end;
+
+}
+
+.logo-div {
+    /* border: 2px solid red; */
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+
 
 
 
@@ -80,7 +103,8 @@ body * {
     /* align-items: center; */
     align-items: center;
     /* position: relative; */
-    border: 3px solid aqua;
+    /* border: 3px solid aqua; */
+    padding: 5px;
     
 }
 
@@ -90,21 +114,39 @@ body * {
     grid-template-columns: 1fr 50px 100px;
     /* grid-template-columns: 1fr 1fr 1fr; */
     position: relative;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     align-self: end;
 }
 
 #search-location {
     appearance: none;
-    border: 2px solid black;
+    border: 1px solid grey;
     height: 30px;
     /* width: 100px; */
     min-width: 100px;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
 
 }
 
+#geolocation-button{
+
+    background-color: rgb(97, 97, 97);
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+#search-button{
+
+    background-color: rgb(97, 97, 97);
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
 .drop-down-container{
-    border: 1px solid greenyellow;
+    /* border: 1px solid greenyellow; */
     height: 0px;
     position: relative;
     width: 100%;
@@ -136,20 +178,12 @@ body * {
     justify-items: center;
 }
 
-.logo-container{
-    /* text-align: center; */
-    border: 2px solid gold;
-    display: grid;
-    justify-items: center;
-    align-items: end;
-
+.status-message{
+    font-weight: bold;
+    padding: 5px;
 }
 
-.logo-div{
-    border: 2px solid red;
-    width: 200px;
-    text-align: center;
-}
+
 
 .display-container{
     /* align-content: space-between; */
@@ -169,11 +203,15 @@ body * {
 
 }
 
+.current-weather-display *{
+    /* border: 2px solid purple; */
+}
+
 .current-weather-display{
     border-radius: 100%;
     height: 250px;
     width: 250px;
-    border: 3px solid purple;
+    border: 3px solid lightcoral;
     display: grid;
     align-items: center;
     text-align: center;
@@ -181,21 +219,40 @@ body * {
 
 .temp-display{
     /* border: 2px solid fuchsia; */
-    font-size: 40px;
+    font-size: 30px;
+    font-weight: bold;
     align-self: flex-end;
 }
 
+.icon-current{
+    align-self: end;
+    align-items: end;
+    justify-items: center;
+}
+
+.icon-current > img {
+    height: 55px;
+}
+
 .weather-desc{
-    font-size: 20px;
+    font-size: 19px;
+    font-weight: bold;
     /* align-self: start; */
 }
 
 .uv-index{
     align-self: start;
+    font-size: 14px;
+    /* font-weight: bold; */
 }
 
 .toggle-container{
     display: grid;
+    gap: 5px;
+}
+
+#temp-toggle{
+    background-color: rgb(97, 97, 97);
 }
 
 .three-day-average{
@@ -225,7 +282,7 @@ body * {
 
     display: grid;
     grid-template-rows: repeat(5, 1fr);
-    border: 2px solid blue;
+    border: 2px solid grey;
     height: 100%;
     height: 170px;
     width: 170px;
@@ -238,7 +295,7 @@ body * {
 }
 
 .selected-daily{
-    background-color: lightgreen;
+    background-color: #005C46;
 }
 .daily *{
 
