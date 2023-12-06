@@ -31,7 +31,9 @@ async function getGeolocationData() {
   } catch (error) {
     const errorMsg = "Error in getGeolocationData: " + error;
     console.error(errorMsg);
-    errorDisplay(errorMsg);
+
+    // user may reject so disable this
+    // errorDisplay(errorMsg);
   }
 }
 
