@@ -296,6 +296,8 @@ body * {
     justify-items: center;
     padding: 20px;
 
+    height: 800px;
+
 }
 
 .current-weather-container{
