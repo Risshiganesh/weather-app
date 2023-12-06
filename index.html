@@ -7,287 +7,312 @@
     <title>Weather Forecast</title>
 </head>
 <body>
-    <div class="main-container">
 
-        <div class="loading-screen">
-            <div class="loading-div">
-                <div class="loading-gif-container">
-                
-                </div>
-                <div class="loading-text">
-                    Loading...
-                </div>
-            </div>
-        </div>
-        <div class="logo-container">
-            <div class="logo-div">
-                Risshweather
-            </div>
-           
-        </div>
+    <div class="primary-container">
 
-        <form action="" method="get" id="search-form">
-            <div class="search-container">
-                <input type="search" name="search-location" id="search-location" required>
-                <button type="button" id="geolocation-button">#</button>
-                <button type="submit" id="search-button">Search</button>
-
-                
-            </div>
-
-            <!-- Remove the dropdown div later -->
-
-            <div class="drop-down-container">
-                <div class="search-drop-down">
-
-                </div>
-            
-            </div>
-
-            <div class="status-display">
-                <div class="status-message">STATUS</div>
-            </div>
-           
-        </form>
-
-        <div class="display-container">
-
-            <div class="current-weather-container">
-            
-                <div class="current-weather-display">
-            
-                    <div class="temp-display"></div>
-                    <div class="icon-current"></div>
-                    <div class="weather-desc"></div>
-                    <div class="uv-index"></div>
-
-                </div>
-            
-            </div>
-
-            <div class="toggle-container">
-
-                <label for="temp-toggle">Toggle between °C or °F</label>
-                <button id="temp-toggle">Celsius</button>
-
-            </div>
-
-            <div class="three-day-average">
-                <div class="three-day-average-container">
-                    <div class="daily">
-                        <div class="date-daily"></div>
-                        <div class="avg-temp-daily"></div>
-                        <div class="icon-daily"></div>
-                        <div class="condition-daily"></div>
-                        <div class="uv-daily"></div>
-                    </div>
-                    <div class="daily">
-                        <div class="date-daily"></div>
-                        <div class="avg-temp-daily"></div>
-                        <div class="icon-daily"></div>
-                        <div class="condition-daily"></div>
-                        <div class="uv-daily"></div>
-                    </div>
-                    <div class="daily">
-                        <div class="date-daily"></div>
-                        <div class="avg-temp-daily"></div>
-                        <div class="icon-daily"></div>
-                        <div class="condition-daily"></div>
-                        <div class="uv-daily"></div>
-                    </div>
-                </div>
-            
-            </div>
-
-            <div class="hourly-average">
     
 
-                <!--  -->
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
+    <div class="background-container">
+
+   
+        <!-- <div class="primary-container"></div> -->
+
+        <div class="main-container">
+
+            <div class="loading-screen">
+                <div class="loading-div">
+                    <div class="loading-gif-container">
+                    
+                    </div>
+                    <div class="loading-text">
+                        Loading...
+                    </div>
                 </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
+            </div>
+
+            <div class="main-error-container">
+                <div class="error-title">
+                    Error
                 </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
+
+                <div class="error-display-container">
+
                 </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
-                </div>
-                <div class="hourly">
-                    <div class="time-hourly"></div>
-                    <div class="icon-hourly"></div>
-                    <div class="condition-hourly"></div>
-                    <div class="avg-temp-hourly"></div>
-                    <div class="uv-hourly"></div>
+            </div>
+            <div class="logo-container">
+                <div class="logo-div">
+                    <div class="logo-icon">
+
+                    </div>
+                    <div class="logo-text">
+                        Risshweather
+                    </div>
                 </div>
             
             </div>
-        </div>
 
-        <div class="footer-container">
-            <div class="footer">
-                <a href="">Made by Risshiganesh Villalan</a>
+            <form action="" method="get" id="search-form">
+                <div class="search-container">
+                    <input type="search" name="search-location" id="search-location" required>
+                    <button type="button" id="geolocation-button">📍</button>
+                    <button type="submit" id="search-button">Search</button>
+
+                    
+                </div>
+
+                <!-- Remove the dropdown div later -->
+
+                <div class="drop-down-container">
+                    <div class="search-drop-down">
+
+                    </div>
+                
+                </div>
+
+                <div class="status-display">
+                    <div class="status-message">STATUS</div>
+                </div>
+            
+            </form>
+
+            <div class="display-container">
+
+                <div class="current-weather-container">
+                
+                    <div class="current-weather-display">
+                
+                        <div class="temp-display"></div>
+                        <div class="icon-current"></div>
+                        <div class="weather-desc"></div>
+                        <div class="uv-index"></div>
+
+                    </div>
+                
+                </div>
+
+                <div class="toggle-container">
+
+                    <label for="temp-toggle">Toggle between °C or °F</label>
+                    <button id="temp-toggle">Celsius</button>
+
+                </div>
+
+                <div class="three-day-average">
+                    <div class="three-day-average-container">
+                        <div class="daily">
+                            <div class="date-daily"></div>
+                            <div class="avg-temp-daily"></div>
+                            <div class="icon-daily"></div>
+                            <div class="condition-daily"></div>
+                            <div class="uv-daily"></div>
+                        </div>
+                        <div class="daily">
+                            <div class="date-daily"></div>
+                            <div class="avg-temp-daily"></div>
+                            <div class="icon-daily"></div>
+                            <div class="condition-daily"></div>
+                            <div class="uv-daily"></div>
+                        </div>
+                        <div class="daily">
+                            <div class="date-daily"></div>
+                            <div class="avg-temp-daily"></div>
+                            <div class="icon-daily"></div>
+                            <div class="condition-daily"></div>
+                            <div class="uv-daily"></div>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div class="hourly-average">
+        
+
+                    <!--  -->
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                    <div class="hourly">
+                        <div class="time-hourly"></div>
+                        <div class="icon-hourly"></div>
+                        <div class="condition-hourly"></div>
+                        <div class="avg-temp-hourly"></div>
+                        <div class="uv-hourly"></div>
+                    </div>
+                
+                </div>
             </div>
+
+            <div class="footer-container">
+                <div class="footer">
+                    <a href="https://github.com/Risshiganesh/weather-app">Made by Risshiganesh Villalan</a>
+                </div>
+            </div>
+            
+            
+
+
         </div>
-        
-        
-
-
-    </div>
 
  
-   
-    
+    </div>
+    </div>
 </body>
 </html>
