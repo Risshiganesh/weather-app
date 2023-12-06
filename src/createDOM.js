@@ -18,7 +18,6 @@ function appendBackgroundVideo() {
 
   createVideoElement.append(videoSource);
   backgroundContainer.append(createVideoElement);
-  appendIcons();
 }
 
 function appendIcons() {
