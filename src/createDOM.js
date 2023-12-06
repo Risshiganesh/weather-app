@@ -7,6 +7,7 @@ function appendBackgroundVideo() {
 
   const createVideoElement = document.createElement("video");
 
+  createVideoElement.setAttribute("playsinline", "");
   createVideoElement.setAttribute("autoplay", "");
   createVideoElement.setAttribute("muted", "");
   createVideoElement.setAttribute("loop", "");
