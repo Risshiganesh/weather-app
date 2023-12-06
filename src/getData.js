@@ -1,4 +1,7 @@
-const searchButton = document.querySelector("#search-button");
+// import { errorDisplay } from "./searchAction";
+
+import { errorDisplay } from "./errorHandling";
+// const searchButton = document.querySelector("#search-button");
 
 //remove all DOM elements from here, only functions that accept parameters are allowed
 
@@ -24,7 +27,7 @@ async function getWeatherData(locationData) {
     const weatherData = await fetch(URL, { mode: "cors" });
 
     if (!weatherData.ok) {
-      console.log("getWeatherData doesn't work!");
+      throw new Error("getWeatherData doesn't work!");
 
       // console.log(previousData);
 
@@ -37,8 +40,9 @@ async function getWeatherData(locationData) {
 
     return parsedWeatherData;
   } catch (error) {
-    console.error("getWeatherData: " + error);
-    // console.log("works!!!!");
+    const errorMsg = "Error in getWeatherData: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 
@@ -105,8 +109,9 @@ async function sortData(weatherData) {
       // },
     };
   } catch (error) {
-    console.log("sort data fn");
-    console.error(error);
+    const errorMsg = "Error in sortData: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 
@@ -129,7 +134,9 @@ async function autocomplete(searchInputValue) {
 
     return parsedAutocompleteResult;
   } catch (error) {
-    console.error(error);
+    const errorMsg = "Error in autocomplete: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 
@@ -168,7 +175,9 @@ async function retrieveInfo(location) {
 
     return finalData;
   } catch (error) {
-    console.error(error);
+    const errorMsg = "Error in retrieveInfo: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 

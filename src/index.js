@@ -1,4 +1,5 @@
 import "./style.css";
+import { appendDOM } from "./createDOM";
 import { initialise } from "./initialiser";
 import { getGeolocationData } from "./geolocation";
 import { toggleTemps, dailyDivsEventListener } from "./domAction";
@@ -9,6 +10,8 @@ import {
 } from "./searchAction";
 
 console.log("webpack works!");
+
+appendDOM();
 
 searchEvents();
 // Uncomment later

@@ -1,3 +1,5 @@
+// import { errorDisplay } from "./searchAction";
+import { errorDisplay } from "./errorHandling";
 async function getGeolocationData() {
   try {
     if ("geolocation" in navigator) {
@@ -27,7 +29,9 @@ async function getGeolocationData() {
       console.log("Geolocation not supported");
     }
   } catch (error) {
-    console.error("Error in getGeolocationData: " + error);
+    const errorMsg = "Error in getGeolocationData: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 

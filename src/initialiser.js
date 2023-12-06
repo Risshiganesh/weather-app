@@ -6,6 +6,9 @@ import {
   statusDisplay,
 } from "./searchAction";
 
+// import { errorDisplay } from "./searchAction";
+import { errorDisplay } from "./errorHandling";
+
 // function initialise(){
 // Check if there is local storage data
 //If yes, use localstorage data
@@ -48,7 +51,9 @@ async function initialise() {
 
     removeLoadingScreen();
   } catch (error) {
-    console.error("Error in initialise: " + error);
+    const errorMsg = "Error in initialise: " + error;
+    console.error(errorMsg);
+    errorDisplay(errorMsg);
   }
 }
 

@@ -16,6 +16,8 @@ import { getGeolocationData } from "./geolocation.js";
 
 import nowLoading from "./assets/loading.gif";
 
+import { errorDisplay } from "./errorHandling.js";
+
 const searchInput = document.querySelector("#search-location");
 
 const searchButton = document.querySelector("#search-button");
@@ -47,7 +49,9 @@ function searchEvents() {
       const autocompleteArray = await autocomplete(searchInputValue);
       createDropDown(autocompleteArray);
     } catch (error) {
-      console.error("Error in searchEvents(searchInput): " + error);
+      const errorMsg = "Error in searchEvents(searchInput): " + error;
+      console.error(errorMsg);
+      errorDisplay(errorMsg);
     }
   });
 
@@ -63,7 +67,9 @@ function searchEvents() {
 
       populateDOM(searchInputValue);
     } catch (error) {
-      console.error("Error in searchEvents(searchButton): " + error);
+      const errorMsg = "Error in searchEvents(searchButton): " + error;
+      console.error(errorMsg);
+      errorDisplay(errorMsg);
     }
   });
 
@@ -108,7 +114,9 @@ function dropDownClickEvent() {
 
         populateDOM(dropDownItem.textContent);
       } catch (error) {
-        console.error("Error in dropDownClickEvent: " + error);
+        const errorMsg = "Error in dropDownClickEvent: " + error;
+        console.error(errorMsg);
+        errorDisplay(errorMsg);
       }
     });
   });
@@ -197,9 +205,10 @@ function geolocationBtnEvent() {
 
       populateDOM(geolocationData);
     } catch (error) {
-      console.error(
-        "Error in geolocationBtnListener(geolocationButton): " + error
-      );
+      const errorMsg =
+        "Error in geolocationBtnListener(geolocationButton): " + error;
+      console.error(errorMsg);
+      errorDisplay(errorMsg);
     }
   });
 }

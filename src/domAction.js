@@ -1,4 +1,6 @@
 import { weatherResult, todayHourlyData } from "./searchAction";
+// import { errorDisplay } from "./searchAction";
+import { errorDisplay } from "./errorHandling";
 
 let hourlyArray;
 
@@ -49,7 +51,9 @@ function toggleTemps() {
 
       return;
     } catch (error) {
-      console.error("Error in toggleTemps: " + error);
+      const errorMsg = "Error in toggleTemps: " + error;
+      console.error(errorMsg);
+      errorDisplay(errorMsg);
     }
   });
 }
