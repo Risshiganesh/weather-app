@@ -2,6 +2,8 @@ import backgroundVideo from "./assets/background-video.mp4";
 
 import logoIcon from "./assets/logo.png";
 
+import locationIcon from "./assets/location-icon.png";
+
 async function appendBackgroundVideo() {
   const backgroundContainer = document.querySelector(".background-container");
 
@@ -56,6 +58,13 @@ function appendIcons() {
   const logoImg = new Image();
   logoImg.src = logoIcon;
   logoIconDiv.append(logoImg);
+
+  const geolocationBtn = document.querySelector("#geolocation-button");
+
+  const locationImg = new Image();
+  locationImg.src = locationIcon;
+  geolocationBtn.append(locationImg)
+
 }
 
 function appendDOM() {
