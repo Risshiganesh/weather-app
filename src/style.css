@@ -55,6 +55,11 @@ body * {
     /* gap: 10px; */
     height: 100%;
     grid-template-rows: 45px 90px 1fr 35px;
+    grid-template-areas:
+    "logo"
+    "search"
+    "display"
+    "footer" ;
     overflow: auto;
     z-index: 1;
     gap: 10px;
@@ -164,6 +169,7 @@ body * {
     display: grid;
     justify-items: center;
     align-items: start;
+    grid-area: logo;
 
 }
 
@@ -211,6 +217,7 @@ body * {
     /* border: 3px solid aqua; */
     padding: 20px;
     gap: 10px;
+    grid-area: search;
 }
 
 .search-container{
@@ -331,6 +338,7 @@ body * {
     padding: 20px;
 
     height: 800px;
+    grid-area: display;
 
 }
 
@@ -527,6 +535,7 @@ body * {
     justify-items: center;
     display: grid;
     align-items: center;
+    grid-area: footer;
 }
 
 .footer{

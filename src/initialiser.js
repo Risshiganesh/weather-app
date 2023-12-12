@@ -34,8 +34,6 @@ async function initialise() {
 
       setLocalStorage(kualaLumpur);
 
-      console.log("NONE");
-
       initialise();
 
       return;

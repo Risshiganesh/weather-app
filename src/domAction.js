@@ -29,7 +29,7 @@ function toggleTemps() {
           return;
         }
         displayHourlyDOM(hourlyArray);
-        console.log("HELI");
+       
         return;
       }
 
@@ -44,10 +44,10 @@ function toggleTemps() {
         }
         displayHourlyDOM(hourlyArray);
 
-        console.log("COPTER");
+       
         return;
       }
-      console.log("TESTTTTT");
+    
 
       return;
     } catch (error) {
@@ -60,7 +60,7 @@ function toggleTemps() {
 
 function updateDOMWithData(weatherData) {
   if (!weatherData) {
-    console.log(weatherData);
+   
     return;
   }
 
@@ -68,11 +68,9 @@ function updateDOMWithData(weatherData) {
   const avgDayTemp = weatherData.finalData.avgDayTemp;
 
   if (tempToggle.textContent === "Celsius") {
-    console.log("HSHSHSHHSHSHS");
-    // console.log(weatherData);
+   
 
-    console.log(currentWeatherData);
-    console.log(avgDayTemp);
+    
 
     tempDisplay.textContent = currentWeatherData.actualCelsius + "°C";
 
@@ -88,8 +86,7 @@ function updateDOMWithData(weatherData) {
   }
 
   if (tempToggle.textContent === "Fahrenheit") {
-    console.log("YEP");
-    // console.log(weatherData);
+  
 
     tempDisplay.textContent = currentWeatherData.actualFahrenheit + "°F";
     weatherDesc.textContent = currentWeatherData.currentDescription;
@@ -117,7 +114,6 @@ function appendIcon(iconDiv, iconsrc) {
 }
 
 function displayDailyDOM(dailyArray) {
-  console.log("WORKSSSS");
 
   for (let index = 0; index < dailyDivs.length; index++) {
     const dateDiv = dailyDivs[index].querySelector(".date-daily");
@@ -165,8 +161,6 @@ function dailyDivsEventListener() {
       dailyDivs.forEach((div) => {
         div.classList.remove("selected-daily");
       });
-      console.log("BAMBALAMMMM");
-      // console.log(weatherResult.finalData.avgDayTemp[index].hour);
       hourlyArray = weatherResult.finalData.avgDayTemp[index].hour;
 
       // add and remove background colour of divs here
@@ -182,8 +176,6 @@ function displayHourlyDOM(hourlyArray) {
     return;
   }
   const hourlyDivs = document.querySelectorAll(".hourly");
-
-  //   console.log(hourlyArray);
 
   for (let index = 0; index < hourlyDivs.length; index++) {
     //   const element = array[index];

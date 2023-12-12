@@ -9,7 +9,7 @@ import {
   removeDropDown,
 } from "./searchAction";
 
-console.log("webpack works!");
+
 
 appendDOM();
 
@@ -17,15 +17,6 @@ searchEvents();
 // Uncomment later
 initialise();
 // TEST
-
-function locationButton() {
-  const coordinates = getGeolocationData().then(function (data) {
-    console.log("coordinates");
-    console.log(data);
-
-    return data;
-  });
-}
 
 // Add eventListeners
 geolocationBtnEvent();

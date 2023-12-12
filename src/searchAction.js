@@ -73,7 +73,7 @@ function searchEvents() {
     }
   });
 
-  console.log("module-works");
+
 }
 
 function createDropDown(autocompleteArray) {
@@ -81,22 +81,16 @@ function createDropDown(autocompleteArray) {
     child.remove();
   });
 
-  // console.log(autocompleteArray);
+
 
   for (const each of autocompleteArray) {
     const dropDownItem = document.createElement("div");
     dropDownItem.classList.add("drop-down-item");
-    // console.log(each);
     dropDownItem.textContent = each.name + ", " + each.country;
-    // dropDownItem.url = each.url;
-    // console.log(each.url);
     searchDropDown.append(dropDownItem);
   }
 
   if (searchDropDown.querySelector(".drop-down-item")) {
-    // console.log("drop-down-works");
-    // console.log(searchDropDown.querySelector(".drop-down-item"));
-
     dropDownClickEvent();
   }
 }
@@ -104,10 +98,7 @@ function createDropDown(autocompleteArray) {
 function dropDownClickEvent() {
   const dropDownItemNodeList = document.querySelectorAll(".drop-down-item");
 
-  // console.log("what");
-
   dropDownItemNodeList.forEach((dropDownItem) => {
-    // console.log(dropDownItem);
     dropDownItem.addEventListener("click", async function () {
       try {
         searchInput.value = dropDownItem.textContent;
@@ -127,9 +118,6 @@ function initialDOMData(weatherData) {
   weatherResult = weatherData;
 
   updateDOMWithData(weatherData);
-  console.log("weather result");
-  console.log(weatherData);
-  console.log("--------------END-----------------");
 
   todayHourlyData = weatherData.finalData.avgDayTemp[0].hour;
 
@@ -154,7 +142,6 @@ function displayLoadingScreen() {
   const loadingGIFContainer = document.querySelector(".loading-gif-container");
 
   if (loadingGIFContainer.querySelector("img")) {
-    console.log("LOADING GIF PRESENT");
     return;
   }
 
@@ -196,12 +183,7 @@ function geolocationBtnEvent() {
     e.preventDefault();
     try {
       const geolocationData = await getGeolocationData();
-      console.log(geolocationData);
-
-      //
-      //
-
-      // const searchInputValue = searchInput.value;
+    
 
       populateDOM(geolocationData);
     } catch (error) {
@@ -220,20 +202,14 @@ async function populateDOM(inputData) {
 
   // if search fails - use previously successful data
   if (!weatherResult) {
-    console.log("NOT FOUND");
 
     statusDisplay(false);
 
     // display location not found on DOM
-
-    console.log(weatherResult);
-    // uses previous data
-    console.log("USING SEARCH SUCCESS");
     // if no data in searchSuccess use initialData
     if (!searchSuccess) {
       searchSuccess = initialData;
     }
-    console.log(searchSuccess);
     initialDOMData(searchSuccess);
     removeLoadingScreen();
     return;
@@ -244,9 +220,8 @@ async function populateDOM(inputData) {
   if (weatherResult == true) {
   }
 
-  console.log("search success works");
   searchSuccess = weatherResult;
-  console.log(weatherResult);
+
 
   searchInput.value = weatherResult.searchResult;
 

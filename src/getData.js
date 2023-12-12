@@ -29,7 +29,7 @@ async function getWeatherData(locationData) {
     if (!weatherData.ok) {
       throw new Error("getWeatherData doesn't work!");
 
-      // console.log(previousData);
+   
 
       return;
     }
@@ -49,17 +49,17 @@ async function getWeatherData(locationData) {
 async function sortData(weatherData) {
   try {
     if (!weatherData) {
-      console.log("location not found");
+     
       return;
     }
-    console.log(weatherData);
+    
 
-    console.log("SORTING DATA");
+    
 
     const location = weatherData.location.name;
     const country = weatherData.location.country;
     // const url = ;
-    console.log(location);
+    
 
     // ----Current weather------
     const currentWeather = weatherData.current;
@@ -74,17 +74,6 @@ async function sortData(weatherData) {
 
     const currentUV = currentWeather.uv;
 
-    // Log current data
-    // console.log(currentWeather);
-
-    console.log("------CURRENT DATA------");
-    console.log(`Actual Temp(C*): ${actualCelsius}`);
-    console.log(`Actual Temp(F*): ${actualFahrenheit}`);
-    console.log(`Feels Like (C*): ${feelsLikeCelsius}`);
-    console.log(`Feels Like (F*): ${feelsLikeFahrenheit}`);
-    console.log(`Description: ` + currentDescription);
-    console.log("UV: " + currentUV);
-    // add UV levels
 
     // -----Forecast weather-----
 
@@ -104,9 +93,6 @@ async function sortData(weatherData) {
         currentUV,
       },
       avgDayTemp,
-      // dailyWeatherData: {
-      //   avgDayTempCelsius,
-      // },
     };
   } catch (error) {
     const errorMsg = "Error in sortData: " + error;
@@ -124,7 +110,6 @@ async function autocomplete(searchInputValue) {
       return;
     }
 
-    console.log(location);
 
     const autocompleteURL = `https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${location}`;
 
@@ -144,19 +129,11 @@ async function autocomplete(searchInputValue) {
 async function retrieveInfo(location) {
   // increases coupling, find an alternative later
 
-  // console.log(url);
 
   try {
-    // const locationData = {
-    //   location: location,
-    //   url: url,
-    // };
     if (!location) {
       return;
     }
-    // console.log(location);
-
-    console.log("Location used: " + location);
 
     const weatherData = await getWeatherData(location);
 
@@ -170,8 +147,6 @@ async function retrieveInfo(location) {
       searchResult: sortedData.location + ", " + sortedData.country,
       finalData: sortedData,
     };
-
-    console.log(finalData);
 
     return finalData;
   } catch (error) {

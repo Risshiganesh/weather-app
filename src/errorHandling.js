@@ -1,10 +1,10 @@
 function errorDisplay(error) {
   const mainErrorContainer = document.querySelector(".main-error-container");
 
-  console.log(mainErrorContainer);
+ 
   if (!mainErrorContainer.classList.contains("display-error")) {
     mainErrorContainer.classList.add("display-error");
-    console.log("display error works");
+    
   }
 
   //   mainErrorContainer.classList.add(".display-error");
